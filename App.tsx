@@ -1,7 +1,9 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
 import Vinglass from './wineGlass2.svg'
+import { ListItem, Icon, Text } from 'react-native-elements'
+
 
 
 interface WineEntry {
@@ -57,9 +59,10 @@ export default function App() {
     );
 
     const renderItem = ({item}: any) => (
-        <Item name={item.name} price={item.price} type={item.type}/>
-    );
-
+            <ListItem style={styles.items}>
+                <Text style={{color: `${item.type}` , backgroundColor: "grey"}} h3>{`${item.name} - kr ${item.price}`}</Text>
+            </ListItem>
+    )
 
     return (
         <View style={styles.container}>
@@ -84,6 +87,7 @@ export default function App() {
                       renderItem={renderItem}
                       keyExtractor={(item) => item.name}
             />
+
         </View>
     );
 }
@@ -98,7 +102,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#000",
-        fontSize: 50,
+        fontSize: 10,
         marginBottom: 20
     },
     vin: {
@@ -107,6 +111,9 @@ const styles = StyleSheet.create({
     vinContainer: {
         display: "flex",
         flexDirection: "row",
+    },
+    items: {
+        backgroundColor: "#000",
     }
 
 });
