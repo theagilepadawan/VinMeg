@@ -2,8 +2,7 @@ import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
 import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
 import Vinglass from './wineGlass2.svg'
-import { ListItem, Icon, Text } from 'react-native-elements'
-
+import {ListItem, Icon, Text} from 'react-native-elements'
 
 
 interface WineEntry {
@@ -59,34 +58,48 @@ export default function App() {
     );
 
     const renderItem = ({item}: any) => (
-            <ListItem style={styles.items}>
-                <Text style={{color: `${item.type}` , backgroundColor: "grey"}} h3>{`${item.name} - kr ${item.price}`}</Text>
-            </ListItem>
+        <ListItem style={styles.items}>
+            <Text style={{color: `${item.type}`, backgroundColor: "black", width: "100%"}}
+                  h4>{`${item.name} - kr ${item.price}`}</Text>
+        </ListItem>
     )
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>VinMeg</Text>
-            <StatusBar style="auto"/>
-
+            <View style={{backgroundColor: "white"}}>
+                <Text style={{backgroundColor: "white"}}>VinMeg</Text>
+            </View>
             <View style={styles.vinContainer}>
                 <View style={styles.vin}>
-                    <Vinglass onPress={toggleRed} height={100} width={100} fill={red ? "red" : "black"}/>
+                    <Vinglass onPress={toggleRed} height={100} width={100} fill={red ? "red" : "white"}/>
+                     <Text style={{backgroundColor: "white"}}>Rød</Text>
                 </View>
 
                 <View style={styles.vin}>
-                    <Vinglass onPress={toggleBrown} height={100} width={100} fill={brown ? "brown" : "black"}/>
+                    <Vinglass onPress={toggleBrown} height={100} width={100} fill={brown ? "brown" : "white"}/>
+                     <Text style={{backgroundColor: "white"}}>Rosé</Text>
                 </View>
 
                 <View style={styles.vin}>
-                    <Vinglass onPress={toggleYellow} height={100} width={100} fill={white ? "yellow" : "black"}/>
+                    <Vinglass onPress={toggleYellow} height={100} width={100} fill={white ? "yellow" : "white"}/>
+                     <Text style={{backgroundColor: "white"}}>Hvit</Text>
                 </View>
             </View>
 
-            <FlatList data={exampleWines.filter( (e) => { return Object.values(types).includes(e.type) } )}
-                      renderItem={renderItem}
-                      keyExtractor={(item) => item.name}
-            />
+            <View
+                style={{
+                    backgroundColor: "black",
+                    height: "100%"
+                }}>
+
+
+                <FlatList data={exampleWines.filter((e) => {
+                    return Object.values(types).includes(e.type)
+                })}
+                          renderItem={renderItem}
+                          keyExtractor={(item) => item.name}
+                />
+            </View>
 
         </View>
     );
@@ -95,7 +108,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: "flex-start",
         marginTop: 50
@@ -106,14 +119,21 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     vin: {
+        marginTop: 20,
         marginBottom: 20
     },
     vinContainer: {
         display: "flex",
+        width: "100%",
         flexDirection: "row",
+        justifyContent: "space-evenly",
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        backgroundColor: "white"
     },
     items: {
         backgroundColor: "#000",
+        width: "100%"
     }
 
 });
